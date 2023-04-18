@@ -3,15 +3,14 @@ import css from "./ContactsList.module.css"; // підключення стил�
 
 
 
-function ContactsList(contacts) {
-       console.log(contacts.contacts[1])
+function ContactsList({onClickDelete, filter}) {
     return (
             <ul className={css.contacts__list}>
-                {contacts.contacts.map(({id, name, number}) => (
+                {filter.map(({id, name, number}) => (
                 <li>
                    <p>{name}</p>
                    <p>{number}</p> 
-                   <button id = {id} className={css.contacts__btn} type="button">Delete</button>
+                   <button onClick={onClickDelete} id = {id} className={css.contacts__btn} type="button">Delete</button>
                 </li>
                 ))}
             </ul>

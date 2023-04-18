@@ -1,11 +1,16 @@
 // import PropTypes from 'prop-types';
 import css from "./ContactForm.module.css"; // підключення стилів на картку
 
-function ContactForm() {
+
+
+function ContactForm({clickSubmit, handleChange, name, number}) {
+
     return (
-        <form className={css.form}>
+        <form className={css.form} onSubmit={clickSubmit}>
         <label htmlFor="name">Name</label>
         <input
+          value={name}
+          onChange={handleChange}
           className={css.form__input}
           type="text"
           name="name"
@@ -15,6 +20,8 @@ function ContactForm() {
         />
         <label htmlFor="number">Number</label>
         <input
+          value={number}
+          onChange={handleChange}
           className={css.form__input}
           type="tel"
           name="number"
@@ -23,7 +30,7 @@ function ContactForm() {
           required
         />
 
-        <button className={css.form__btn} type="submite">Add contact</button>
+        <button className={css.form__btn} type="submit">Add contact</button>
         </form>
     );
   }
