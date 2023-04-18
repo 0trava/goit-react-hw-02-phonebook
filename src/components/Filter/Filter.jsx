@@ -2,6 +2,7 @@
 import css from "./Filter.module.css"; // підключення стилів на картку
 
 function Filter() {
+
     return (
       <div className={css.form__filter}>
           <label htmlFor="Find">Find contacts by name</label>

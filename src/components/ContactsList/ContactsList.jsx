@@ -3,14 +3,17 @@ import css from "./ContactsList.module.css"; // підключення стил�
 
 
 
-function ContactsList() {
+function ContactsList(contacts) {
+       console.log(contacts.contacts[1])
     return (
             <ul className={css.contacts__list}>
+                {contacts.contacts.map(({id, name, number}) => (
                 <li>
-                   <p>Eden Line</p>
-                   <p>111-111-111</p> 
-                   <button className={css.contacts__btn} type="button">Delete</button>
+                   <p>{name}</p>
+                   <p>{number}</p> 
+                   <button id = {id} className={css.contacts__btn} type="button">Delete</button>
                 </li>
+                ))}
             </ul>
  
     );

@@ -3,6 +3,8 @@
     gap: 50px;
     font-weight: bolder;
     align-items: center;
+    justify-content: space-between
+
 }
 
 .contacts__btn{

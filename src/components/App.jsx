@@ -31,7 +31,7 @@ state = {
 
 // РЕНДНЕРІНГ сторінки
   render () {
-
+      const { contacts, filter, name, number } = this.state;
 
       return (
       <div className={css.container}>
@@ -39,8 +39,8 @@ state = {
         <ContactForm />
 
         <h2 className={css.section_title}>Contacts</h2>
-        <Filter />
-        <ContactsList></ContactsList>
+        <Filter  />
+        <ContactsList contacts={contacts}></ContactsList>
       </div>
   );}
 };
