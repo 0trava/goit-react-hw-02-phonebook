@@ -14,7 +14,7 @@ import css from "./App.module.css";
 
 class App extends Component {
 
-
+// Ввідні данні  
 state = {
   contacts: [
     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},

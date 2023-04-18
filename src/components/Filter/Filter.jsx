@@ -1,10 +1,12 @@
-
+// import PropTypes from 'prop-types';
+import css from "./Filter.module.css"; // підключення стилів на картку
 
 function Filter() {
     return (
-      <div>
+      <div className={css.form__filter}>
           <label htmlFor="Find">Find contacts by name</label>
           <input
+          className={css.filter__input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"

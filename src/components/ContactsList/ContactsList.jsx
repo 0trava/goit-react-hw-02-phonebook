@@ -1,14 +1,15 @@
-
+// import PropTypes from 'prop-types';
+import css from "./ContactsList.module.css"; // підключення стилів на картку
 
 
 
 function ContactsList() {
     return (
-            <ul>
+            <ul className={css.contacts__list}>
                 <li>
                    <p>Eden Line</p>
                    <p>111-111-111</p> 
-                   <button type="button">Delete</button>
+                   <button className={css.contacts__btn} type="button">Delete</button>
                 </li>
             </ul>
  

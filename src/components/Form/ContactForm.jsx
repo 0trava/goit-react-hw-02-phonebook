@@ -1,11 +1,12 @@
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import css from "./ContactForm.module.css"; // підключення стилів на картку
 
 function ContactForm() {
     return (
-        <form>
+        <form className={css.form}>
         <label htmlFor="name">Name</label>
         <input
+          className={css.form__input}
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -14,6 +15,7 @@ function ContactForm() {
         />
         <label htmlFor="number">Number</label>
         <input
+          className={css.form__input}
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -21,7 +23,7 @@ function ContactForm() {
           required
         />
 
-        <button type="submite">Add contact</button>
+        <button className={css.form__btn} type="submite">Add contact</button>
         </form>
     );
   }
