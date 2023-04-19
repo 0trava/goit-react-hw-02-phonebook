@@ -4,7 +4,6 @@ import css from "./ContactsList.module.css"; // підключення стил�
 
 
 export const ContactsList = ({onClickDelete, contacts}) =>{
-    console.log(contacts);
     return (
             <ul className={css.contacts__list}>
                 {contacts.map(contact => {
