@@ -1,20 +1,16 @@
-// Встановлення через термінал генератор id
+// Встановлення через термінал генератора id
 // $ npm install --save nanoid
 
-
-// model.id = nanoid() //=> "V1StGXR8_Z5jdHi6B-myT"
-import { nanoid } from 'nanoid';// підключення генератора id
+import { nanoid } from 'nanoid'; // підключення генератора id
 import {Component} from 'react';
-import ContactForm from "./Form/ContactForm";
-import ContactsList from "./ContactsList/ContactsList";
-import Filter from "./Filter/Filter";
-import css from "./App.module.css";
+import {ContactForm} from "./Form/ContactForm";
+import {ContactsList} from "./ContactsList/ContactsList";
+import {Filter} from "./Filter/Filter";
+import css from "./App.module.css"; // підключення стилів
 
+export class App extends Component {
 
-
-class App extends Component {
-
-// Ввідні данні  
+// ДАННІ - Ввідні данні по ТЗ 
 state = {
   contacts: [
     {id: 'id-1', name: 'Rosie Simpson', number: '459-12-56'},
@@ -23,37 +19,39 @@ state = {
     {id: 'id-4', name: 'Annie Copeland', number: '227-91-26'},
   ],
   filter: '',
-  name: '',
-  number: ''
 }
 
-// INPUT - зберігаємо данні при вводі текста 
+// INPUT - зберігаємо данні при вводі текста в input
 handleChange = (event) => {
       const {name, value} = event.currentTarget;
       this.setState({[name]: value});
     }
 
+// ADD CONTACT - додаємо контакт до масиву
+addContact = ({ name, number }) => {
+    let newId = 'id-' + nanoid(3); // генеруємо id
+    let list = this.state.contacts; // беремо данны масиву
 
-// SUBMIT(ADD CONTACT) - зберігаємо данні по кліку на кнопку 
-clickSubmit = e => {
-  e.preventDefault(); // Зупиняємо оновлення сторінки
-  const {name, number} = this.state;
-  let newId = 'id-' + nanoid(3); // генеруємо id
-  this.state.contacts.push({id:newId, name: name, number: number});// зберігаємо данні
-  this.setState( {name: '', number: ''}); // Чистемо input
-}
+    // ПЕРЕВІРКА - чи такий контакт вже існує
+    if (list.some(value => value.name.toLocaleLowerCase() === name.toLocaleLowerCase())){
+      alert(`"${name}" is already in contacts`); // повідомлення, що такий контакт вже існує
+    } else {
+      list.push({id:newId, name: name, number: number}); // додаємо до масиву данних
+      this.setState({contacts: list}); // ререндиримо сторінку
+    }
+  }
 
-// DELETE - видаляємо контакт 
+
+
+// DELETE - видаляємо контакт з масиву
 onClickDelete = e => {
   e.preventDefault(); // Зупиняємо оновлення сторінки
   const id = e.currentTarget.id;
-  console.log(id);
-  const { contacts } = this.state;
-  const filtred = contacts.filter(item => item.id !== id); // Новий масив, який містить всі контакти, окрім того, що має ідентифікатор
+  const filtred = this.state.contacts.filter(item => item.id !== id); // Новий масив, який містить всі контакти, окрім того, що має ідентифікатор
   this.setState({ contacts: filtred });
 }
 
-
+// FILTER - фільтруємо введені данні 
 filter = () => {
   const { contacts, filter } = this.state;
 
@@ -61,26 +59,24 @@ filter = () => {
   const filteredContacts = contacts.filter(contact =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );
-
-
-  // повернення нового масиву, який містить тільки ті контакти, які відповідають рядку пошуку
-  return filteredContacts;
+  return filteredContacts;  // повернення нового масиву
 }
 
 // РЕНДНЕРІНГ сторінки
   render () {
-      const { filter, name, number } = this.state;
+      const { filter } = this.state;
 
       return (
       <div className={css.container}>
         <h1 className={css.section_title}>Phonebook</h1>
-        <ContactForm  clickSubmit={this.clickSubmit} handleChange={this.handleChange} name={name} number ={number}/>
+        <ContactForm addContact={this.addContact}/>
 
         <h2 className={css.section_title}>Contacts</h2>
         <Filter  filter={filter} handleChange={this.handleChange}/>
-        <ContactsList onClickDelete={this.onClickDelete} filter={this.filter()}></ContactsList>
+        <ContactsList onClickDelete={this.onClickDelete} contacts={this.filter()}></ContactsList>
       </div>
   );}
+  
 };
 
-export default App;
+

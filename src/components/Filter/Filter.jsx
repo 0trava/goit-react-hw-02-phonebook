@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import css from "./Filter.module.css"; // підключення стилів на картку
 
-function Filter({handleChange, filter}) {
+export const Filter = ({handleChange, filter}) => {
 
     return (
       <div className={css.form__filter}>
@@ -24,7 +24,5 @@ function Filter({handleChange, filter}) {
 
 Filter.propTypes = {
   filter: PropTypes.string.isRequired, // рядок
-  onChangeInput: PropTypes.func.isRequired // функція
+  handleChange: PropTypes.func.isRequired // функція
 };
-  
-  export default Filter;

@@ -1,26 +1,26 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from "./ContactsList.module.css"; // підключення стилів на картку
 
 
 
-function ContactsList({onClickDelete, filter}) {
+export const ContactsList = ({onClickDelete, contacts}) =>{
+    console.log(contacts);
     return (
             <ul className={css.contacts__list}>
-                {filter.map(({id, name, number}) => (
-                <li>
-                   <p>{name}</p>
-                   <p>{number}</p> 
-                   <button onClick={onClickDelete} id = {id} className={css.contacts__btn} type="button">Delete</button>
-                </li>
-                ))}
+                {contacts.map(contact => {
+                return (<li>
+                   <p>{contact.name}</p>
+                   <p>{contact.number}</p> 
+                   <button onClick={onClickDelete} id = {contact.id} className={css.contacts__btn} type="button">Delete</button>
+                </li>)
+                })}
             </ul>
- 
     );
   }
   
-//   Form.prototype = {
-//     message: PropTypes.string.isRequired,
-//   };
+  ContactsList.prototype = {
+    onClickDelete: PropTypes.func.isRequired,// функція
+    contacts: PropTypes.func.isRequired,// функція
+  };
   
-  export default ContactsList;
 

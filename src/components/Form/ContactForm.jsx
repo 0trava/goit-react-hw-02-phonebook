@@ -1,16 +1,35 @@
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import css from "./ContactForm.module.css"; // підключення стилів на картку
+import { Component } from 'react'; // імпорт базового класу React Component
+
+export class ContactForm extends Component {
+
+    state = {
+      name: '',
+      number: '',
+    };
 
 
+    // INPUT - зберігаємо данні при вводі текста 
+    handleChange = (event) => {
+      const {name, value} = event.currentTarget;
+      this.setState({[name]: value});
+    }
 
-function ContactForm({clickSubmit, handleChange, name, number}) {
-
-    return (
-        <form className={css.form} onSubmit={clickSubmit}>
+    // РЕНДНЕРІНГ секції 
+    render() {
+      return (
+        <>
+        <form className={css.form} 
+                  onSubmit={evt => {
+                    evt.preventDefault(); // відміна перезавантаження сторінки
+                    this.props.addContact(this.state);// Передача стану компонента до addContact як (props) з батьківського компоненту.
+                    this.setState( {name: '', number: ''}); // очищення вмісту форми
+                  }}>
         <label htmlFor="name">Name</label>
         <input
-          value={name}
-          onChange={handleChange}
+          value={this.state.name}
+          onChange={this.handleChange}
           className={css.form__input}
           type="text"
           name="name"
@@ -20,8 +39,8 @@ function ContactForm({clickSubmit, handleChange, name, number}) {
         />
         <label htmlFor="number">Number</label>
         <input
-          value={number}
-          onChange={handleChange}
+          value={this.state.number}
+          onChange={this.handleChange}
           className={css.form__input}
           type="tel"
           name="number"
@@ -32,11 +51,12 @@ function ContactForm({clickSubmit, handleChange, name, number}) {
 
         <button className={css.form__btn} type="submit">Add contact</button>
         </form>
+        </>
     );
+    }
+    
   }
   
-//   ContactForm.prototype = {
-//     message: PropTypes.string.isRequired,
-//   };
-  
-  export default ContactForm;
+  ContactForm.propTypes = {
+    addContact: PropTypes.func.isRequired, // функція
+  }
